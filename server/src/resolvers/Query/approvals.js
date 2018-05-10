@@ -1,5 +1,6 @@
 const { getUserId, ApprovalStatus, PublishStatu } = require("../../utils");
 const admin = require("firebase-admin");
+const  { query } = require('./query');
 const functions = require("firebase-functions");
 const Lodash = require("lodash");
 var serviceAccount = require('../../qnary-my-fb.json');
@@ -25,43 +26,12 @@ const approvalsRef = admin.database().ref("approvals");
 
 
 const approvals = {
-  async approvals(_, {}, req ) {
-    // let uid = await admin.auth().verifyIdToken(token);
-    console.log('req', req );
-      let token=   req.headers('Authentication')
-    console.log('token', token );
-    admin
-      .auth()
-      .verifyIdToken(token)
-      .then(function(decodedToken) {
-        var uid = decodedToken.uid;
-        return approvalsRef.once("value").then(snapshot => {
-          const approvals = snapshot.val();
-          if (approvals === null) return [];
-          return Object.keys(approvals).map(o =>
-            Object.assign({ id: o }, approvals[o])
-          );
-        });
-      })
-      .catch(function(error) {
-        // Handle error
-        console.log("Error verify IdToken:", error);
-        return error;
-      });
-    //   console.log('uid:', uid);
+   approvals(_, {}, ctx ) {
+     return query(_, {}, ctx , approvalsRef);
   },
-  async approval(_, { id }, { token }) {
-    //  let uid = await admin.auth().verifyIdToken(token);
-    return admin
-      .database()
-      .ref(`approvals/${id}`)
-      .once("value")
-      .then(snapshot => {
-        const approval = snapshot.val();
-        return Object.assign({ id: id }, approval);
-        // console.log('approval' , approval);
-      });
-  }
+   approval(_, { id }, ctx) {
+    return query(_, {id}, ctx , approvalsRef);
+   }
 };
 
 module.exports = { approvals };

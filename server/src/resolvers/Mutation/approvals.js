@@ -8,7 +8,7 @@ const approvalsRef = admin.database().ref('approvals');
 
 const approvals_mutation = {
   async createApproval(_, { input }, { token }) {
- //   let uid = await admin.auth().verifyIdToken(token);
+  if (Lodash.isNil(ctx.request.user)) throw new Error(`Unauthorized request`)
     return (
       new Promise((resolve) => {
         const approval = approvalsRef.push(input, () => {
@@ -19,8 +19,8 @@ const approvals_mutation = {
     );
   },
   async updateApproval(_, { input }, { token }) {
-  //  let uid = await admin.auth().verifyIdToken(token);
-    const approvalRef = approvalsRef.child(input.id);
+    if (Lodash.isNil(ctx.request.user)) throw new Error(`Unauthorized request`)
+      const approvalRef = approvalsRef.child(input.id);
     return approvalRef.once('value')
       .then(snapshot => {
         const approval = snapshot.val();
@@ -34,7 +34,7 @@ const approvals_mutation = {
       });
   },
   async deleteApproval(_, { input }, { token }) {
-  //  let uid = await admin.auth().verifyIdToken(token);
+    if (Lodash.isNil(ctx.request.user)) throw new Error(`Unauthorized request`) 
     const approvalRef = approvalsRef.child(input.id);
     return approvalRef.once('value')
       .then((snapshot) => {
