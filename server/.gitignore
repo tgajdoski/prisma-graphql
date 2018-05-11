@@ -7,5 +7,5 @@ node_modules
 .env*
 
 
-./src/qnary-my-fb.json
-./src/qnary-dev.json
+/src/qnary-my-fb.json
+/src/qnary-dev.json
