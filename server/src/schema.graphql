@@ -1,11 +1,4 @@
-# import {Post} from "./generated/prisma.graphql"
-
 type Query {
-  feed: [Post!]!
-  drafts: [Post!]!
-  post(id: ID!): Post
-  me: User
-
   approvals: [Approval]
   usrerapprovals(oid: String!, uid: String!, status: String): [Approval]
   approval(id: String!): Approval
@@ -24,119 +17,98 @@ type Query {
 }
 
 type Mutation {
-  signup(email: String!, password: String!, name: String!): AuthPayload!
-  login(email: String!, password: String!): AuthPayload!
-  createDraft(title: String!, text: String!): Post!
-  publish(id: ID!): Post!
-  deletePost(id: ID!): Post!
+  createApproval(input: ApprovalCreateInput!): Approval
+  updateApproval(input: ApprovalInput): Approval
+  deleteApproval(input: ApprovalDeleteInput): Approval
 
-   createApproval(input: ApprovalCreateInput!): Approval
-    updateApproval(input: ApprovalInput): Approval
-    deleteApproval(input: ApprovalDeleteInput): Approval
+  createDevice(input: DeviceCreateInput!): Device
+  updateDevice(input: DeviceInput): Device
+  deleteDevice(input: DeviceDeleteInput): Device
 
-    createDevice(input: DeviceCreateInput!): Device
-    updateDevice(input: DeviceInput): Device
-    deleteDevice(input: DeviceDeleteInput): Device
+  createConnection(input: ConnectionCreateInput!): Connection
+  updateConnection(input: ConnectionInput): Connection
+  deleteConnection(input: ConnectionDeleteInput): Connection
 
-    createConnection(input: ConnectionCreateInput!): Connection
-    updateConnection(input: ConnectionInput): Connection
-    deleteConnection(input: ConnectionDeleteInput): Connection
+  createGroup(input: GroupCreateInput!): Group
+  updateGroup(input: GroupInput): Group
+  deleteGroup(input: GroupDeleteInput): Group
 
-    createGroup(input: GroupCreateInput!): Group
-    updateGroup(input: GroupInput): Group
-    deleteGroup(input: GroupDeleteInput): Group
-
-    createOrganization(input: OrganizationCreateInput!): Organization
-    updateOrganization(input: OrganizationInput): Organization
-    deleteOrganization(input: OrganizationDeleteInput):Organization
-    
-}
-
-type Subscription {
-  feedSubscription: PostSubscriptionPayload!
-}
-
-type AuthPayload {
-  token: String!
-  user: User!
-}
-
-type User {
-  id: ID!
-  email: String!
-  name: String!
-  posts: [Post!]!
+  createOrganization(input: OrganizationCreateInput!): Organization
+  updateOrganization(input: OrganizationInput): Organization
+  deleteOrganization(input: OrganizationDeleteInput): Organization
 }
 
 type Settings {
-  opt_in : Boolean,
-  timezone : String
+  opt_in: Boolean
+  timezone: String
 }
+
 type Publish {
-  settings : Settings 
-  status : String,
-  updated_at : String
+  settings: Settings
+  status: String
+  updated_at: String
 }
 
 input ApprovalCreateInput {
-  category : String
-  connection_id : String
-  content : String
-  created_at : Int,
-  created_by : String
-  edited_by : String
-  image : String
-  oid : String
-  original_content : String
-  source : String
-  status : String
-  uid : String
-  updated_at : String
-  updated_by : String
+  category: String
+  connection_id: String
+  content: String
+  created_at: Int
+  created_by: String
+  edited_by: String
+  image: String
+  oid: String
+  original_content: String
+  source: String
+  status: String
+  uid: String
+  updated_at: String
+  updated_by: String
 }
 
 input ApprovalInput {
   id: String
-  category : String
-  connection_id : String
-  content : String
-  created_at : Int,
-  created_by : String
-  edited_by : String
-  image : String
-  oid : String
-  original_content : String
-  source : String
-  status : String
-  uid : String
-  updated_at : String
-  updated_by : String
+  category: String
+  connection_id: String
+  content: String
+  created_at: Int
+  created_by: String
+  edited_by: String
+  image: String
+  oid: String
+  original_content: String
+  source: String
+  status: String
+  uid: String
+  updated_at: String
+  updated_by: String
 }
+
 input ApprovalDeleteInput {
   id: String!
 }
 
 type Approval {
   id: String!
-  category : String
-  connection_id : String
-  content : String
-  created_at : Int,
-  created_by : String
-  edited_by : String
-  image : String
-  oid : String
-  original_content : String
-  publish :  Publish 
-  publish_at : String
-  publish_at_str : String
-  publish_date : String
-  publish_status : String
-  source : String
-  status : String
-  uid : String
-  updated_at : String
-  updated_by : String
+  category: String
+  connection_id: String
+  content: String
+  created_at: Int
+  created_by: String
+  edited_by: String
+  image: String
+  oid: String
+  original_content: String
+  publish: Publish
+  publish_at: String
+  publish_at_str: String
+  publish_date: String
+  publish_status: String
+  source: String
+  status: String
+  uid: String
+  updated_at: String
+  updated_by: String
 }
 
 type auth {
@@ -144,72 +116,69 @@ type auth {
   provider : String
 }
 
-
 type ProfileRaw {
-  emailAddress : String
-  firstName : String
-  headline :String
-  id : String
-  lastName : String
-  pictureUrl :String
-  publicProfileUrl :String
+  emailAddress: String
+  firstName: String
+  headline: String
+  id: String
+  lastName: String
+  pictureUrl: String
+  publicProfileUrl: String
 }
 
-type Profile  {
-  avatar : String
-  bio :String
-  email : String
-  firstname : String
-  id : String
-  lastname :String
-  name : String
-  raw : ProfileRaw
-  url :String
+type Profile {
+  avatar: String
+  bio: String
+  email: String
+  firstname: String
+  id: String
+  lastname: String
+  name: String
+  raw: ProfileRaw
+  url: String
 }
-
 
 type Time {
-  daypart : String
-  hour : String
-  minute : String
+  daypart: String
+  hour: String
+  minute: String
 }
 
 type Default_Schedules {
-  opt_in : Boolean
-  timezone : String
-  posting_times : [Time]
+  opt_in: Boolean
+  timezone: String
+  posting_times: [Time]
 }
 
 type Schedules {
-  default : Default_Schedules
+  default: Default_Schedules
 }
 
-type  ConnectionPubishSettings {
-  schedules : Schedules
+type ConnectionPubishSettings {
+  schedules: Schedules
 }
 
 type ConnectionPublish {
-  settings : ConnectionPubishSettings
+  settings: ConnectionPubishSettings
 }
 
 type Connection {
   id: String!
   auth: auth
-  created_at : String
-  created_by : String
-  ignore : Boolean
-  name : String
-  oid : String
-  profile : Profile
+  created_at: String
+  created_by: String
+  ignore: Boolean
+  name: String
+  oid: String
+  profile: Profile
   publish: ConnectionPublish
-  source : String
-  source_type : String
-  status : String
-  type : String
-  uid : String
-  version : String
+  source: String
+  source_type: String
+  status: String
+  type: String
+  uid: String
+  version: String
 }
-
 
 input DeviceCreateInput {
   endpointId: String
@@ -226,31 +195,30 @@ input DeviceDeleteInput {
 
 type Device {
   id: String!
-  endpointId : String
+  endpointId: String
 }
-
 
 input GroupInput {
   id: String!
-  created_at : String
-  created_by :String
-  description : String
-  members :String
-  name : String
-  oid : String
-  updated_at : String
-  updated_by : String
+  created_at: String
+  created_by: String
+  description: String
+  members: String
+  name: String
+  oid: String
+  updated_at: String
+  updated_by: String
 }
 
 input GroupCreateInput {
-  created_at : String
-  created_by :String
-  description : String
-  members :String
-  name : String
-  oid : String
-  updated_at : String
-  updated_by : String
+  created_at: String
+  created_by: String
+  description: String
+  members: String
+  name: String
+  oid: String
+  updated_at: String
+  updated_by: String
 }
 
 input GroupDeleteInput {
@@ -259,160 +227,142 @@ input GroupDeleteInput {
 
 type Group {
   id: String!
-  created_at : String
-  created_by :String
-  description : String
-  members :String
-  name : String
-  oid : String
-  updated_at : String
-  updated_by : String
+  created_at: String
+  created_by: String
+  description: String
+  members: String
+  name: String
+  oid: String
+  updated_at: String
+  updated_by: String
 }
 
-
-
-input OrgProfileInput  {
-  about : String
-  name : String
+input OrgProfileInput {
+  about: String
+  name: String
 }
 
 input OrganizationInput {
   id: String!
-  created_at : String
-  members : String
-  profile : OrgProfileInput
-  slug : String
-  streams : String
+  created_at: String
+  members: String
+  profile: OrgProfileInput
+  slug: String
+  streams: String
 }
 
 input OrganizationCreateInput {
-  created_at : String
-  members : String
-  profile : OrgProfileInput
-  slug : String
-  streams : String
+  created_at: String
+  members: String
+  profile: OrgProfileInput
+  slug: String
+  streams: String
 }
 
 input OrganizationDeleteInput {
   id: String!
 }
 
-
-type OrgProfile  {
-  about : String
-  name : String
+type OrgProfile {
+  about: String
+  name: String
 }
-
 
 type Organization {
   id: String!
-  created_at : String
-  members : String
-  profile : OrgProfile
-  slug : String
-  streams : String
+  created_at: String
+  members: String
+  profile: OrgProfile
+  slug: String
+  streams: String
 }
-
-
-
 
 input auth_input {
-  firebase_id : String
-  provider : String
+  firebase_id: String
+  provider: String
 }
-
 
 input ProfileRawInput {
-  emailAddress : String
-  firstName : String
-  headline :String
-  id : String
-  lastName : String
-  pictureUrl :String
-  publicProfileUrl :String
+  emailAddress: String
+  firstName: String
+  headline: String
+  id: String
+  lastName: String
+  pictureUrl: String
+  publicProfileUrl: String
 }
 
-
-input Profile_input  {
-  avatar : String
-  bio :String
-  email : String
-  firstname : String
-  id : String
-  lastname :String
-  name : String
-  raw : ProfileRawInput
-  url :String
+input Profile_input {
+  avatar: String
+  bio: String
+  email: String
+  firstname: String
+  id: String
+  lastname: String
+  name: String
+  raw: ProfileRawInput
+  url: String
 }
-
-
 
 input TimeInput {
-  daypart : String
-  hour : String
-  minute : String
+  daypart: String
+  hour: String
+  minute: String
 }
 
 input Default_SchedulesInput {
-  opt_in : Boolean
-  timezone : String
-  posting_times : [TimeInput]
+  opt_in: Boolean
+  timezone: String
+  posting_times: [TimeInput]
 }
-
 
 input SchedulesInput {
-  default : Default_SchedulesInput
-
+  default: Default_SchedulesInput
 }
 
-
 input ConnectionPubishSettingsInput {
-  schedules : SchedulesInput
+  schedules: SchedulesInput
 }
 
 input ConnectionPublishInput {
-  settings : ConnectionPubishSettingsInput
+  settings: ConnectionPubishSettingsInput
 }
-
-
 
 input ConnectionCreateInput {
   auth: auth_input
-  created_at : String
-  created_by : String
-  ignore : Boolean
-  name : String
-  oid : String
-  profile : Profile_input
+  created_at: String
+  created_by: String
+  ignore: Boolean
+  name: String
+  oid: String
+  profile: Profile_input
   publish: ConnectionPublishInput
-  source : String
-  source_type : String
-  status : String
-  type : String
-  uid : String
-  version : String
+  source: String
+  source_type: String
+  status: String
+  type: String
+  uid: String
+  version: String
 }
 
 input ConnectionInput {
   id: String
   auth: auth_input
-  created_at : String
-  created_by : String
-  ignore : Boolean
-  name : String
-  oid : String
-  profile : Profile_input
+  created_at: String
+  created_by: String
+  ignore: Boolean
+  name: String
+  oid: String
+  profile: Profile_input
   publish: ConnectionPublishInput
-  source : String
-  source_type : String
-  status : String
-  type : String
-  uid : String
-  version : String
+  source: String
+  source_type: String
+  status: String
+  type: String
+  uid: String
+  version: String
 }
-
 
 input ConnectionDeleteInput {
   id: String!
 }
-

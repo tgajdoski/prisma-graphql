@@ -42,7 +42,7 @@ const approvals = {
     return query(_, { id }, ctx, approvalsRef);
   },
   async usrerapprovals(_, { oid, uid, status }, ctx) {
-    console.log('status', status);
+    if (Lodash.isNil(ctx.request.user)) throw new Error(`Unauthorized request`)
     let userApprovalsSnap 
     if (!Lodash.isNil(status))
       userApprovalsSnap =  await orgsuserappRef

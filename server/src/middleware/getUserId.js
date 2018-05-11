@@ -19,11 +19,12 @@ const getUserId = async (req, res, next) => {
     let token =   req.header('Authentication')
     if (Lodash.isNil(token)) return next();
     admin.auth().verifyIdToken(token)
-   .then(function(decodedToken) {
-     req.user = { token: token, ...decodedToken }
+   .then(function(user) {
+     req.user = { token: token, ...user }
      //    console.log('req' ,req);
      return next()
    }).catch(function(error) {
+      req.user = null;
      console.log(error)
      return next()
    });

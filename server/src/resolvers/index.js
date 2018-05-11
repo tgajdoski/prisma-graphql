@@ -11,11 +11,8 @@ const { organizations_mutation } = require('./Mutation/organizations')
 const { devices_mutation } = require('./Mutation/devices')
 const { connections_mutation } = require('./Mutation/connections')
 
-const { auth } = require('./Mutation/auth')
-const { post } = require('./Mutation/post')
-
-const { Subscription } = require('./Subscription')
-const { AuthPayload } = require('./AuthPayload')
+// const { Subscription } = require('./Subscription')
+// const { AuthPayload } = require('./AuthPayload')
 
 module.exports = {
   Query: {
@@ -31,9 +28,7 @@ module.exports = {
     ...groups_mutation,
     ...devices_mutation,
     ...connections_mutation,
-    ...auth,
-    ...post,
-  },
-  Subscription,
-  AuthPayload,
+  }
+  // Subscription,
+  // AuthPayload,
 }

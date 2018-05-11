@@ -4,6 +4,7 @@ var serviceAccount = require('../../qnary-my-fb.json');
 const Lodash = require("lodash");
 
 const query = async (_, { id }, ctx, ref) => {
+    console.log(ctx.request.user)
     if (Lodash.isNil(ctx.request.user)) throw new Error(`Unauthorized request`)
     if (!Lodash.isNil(id))
         ref = ref.child(`/${id}`)
