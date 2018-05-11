@@ -7,11 +7,11 @@ const Lodash = require('lodash');
 const devicesRef = admin.database().ref('devices');
 
 const devices = {
-  async devices(_, { }, ctx) {
-    return  query(_, {}, ctx , devicesRef);
+  devices(_, { }, ctx) {
+    return  query( {}, ctx , devicesRef);
     },
-    async device(_, { id }, ctx) {
-      return  query(_, { id }, ctx , devicesRef);
+  device(_, { id }, ctx) {
+      return  query({ id }, ctx , devicesRef);
     },
 }
 

@@ -7,11 +7,11 @@ const Lodash = require('lodash');
 const orgsRef = admin.database().ref('organizations');
 
 const organizations = {
-  async organizations(_, { }, ctx) {
-    return  query(_, {}, ctx , orgsRef);
+  organizations(_, { }, ctx) {
+    return  query({}, ctx , orgsRef);
    },
-   async organization(_, { id }, ctx) {
-    return  query(_, { id }, ctx , orgsRef);
+  organization(_, { id }, ctx) {
+    return  query({ id }, ctx , orgsRef);
    },
 }
 

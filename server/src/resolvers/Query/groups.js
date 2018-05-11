@@ -7,11 +7,11 @@ const Lodash = require('lodash');
 const groupsRef = admin.database().ref('groups');
 
 const groups = {
-  async  groups(_, { }, ctx) {
-    return  query(_, {}, ctx , groupsRef);
+  groups(_, { }, ctx) {
+    return  query({}, ctx , groupsRef);
     },
-    async group(_, { id }, ctx) {
-      return  query(_, { id }, ctx , groupsRef);
+  group(_, { id }, ctx) {
+      return  query({ id }, ctx , groupsRef);
     },
 }
 

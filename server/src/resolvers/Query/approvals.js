@@ -3,21 +3,21 @@ const admin = require("firebase-admin");
 const { query } = require("./query");
 const functions = require("firebase-functions");
 const Lodash = require("lodash");
-var serviceAccount = require("../../qnary-my-fb.json");
+var serviceAccount = require("../../qnary-dev.json");
 
 admin.initializeApp({
-  // apiKey: "AIzaSyAL5jNakQk8PqF89f8rfS6TCedm0oFlBZ4",
-  // authDomain: "qnary-dev.firebaseapp.com",
-  // databaseURL: "https://qnary-dev.firebaseio.com",
-  // messagingSenderId: "582735679903",
-  // projectId: "qnary-dev",
-  // storageBucket: "qnary-dev.appspot.com"
-  apiKey: "AIzaSyDNDVQg4RncRKYr5r9O1GZrQOsv24NLd64",
-  authDomain: "qnary-my-fb.firebaseapp.com",
-  databaseURL: "https://qnary-my-fb.firebaseio.com",
+  apiKey: "AIzaSyAL5jNakQk8PqF89f8rfS6TCedm0oFlBZ4",
+  authDomain: "qnary-dev.firebaseapp.com",
+  databaseURL: "https://qnary-dev.firebaseio.com",
   messagingSenderId: "582735679903",
-  projectId: "qnary-my-fb",
-  storageBucket: "qnary-my-fb.appspot.com",
+  projectId: "qnary-dev",
+  storageBucket: "qnary-dev.appspot.com",
+  // apiKey: "AIzaSyDNDVQg4RncRKYr5r9O1GZrQOsv24NLd64",
+  // authDomain: "qnary-my-fb.firebaseapp.com",
+  // databaseURL: "https://qnary-my-fb.firebaseio.com",
+  // messagingSenderId: "582735679903",
+  // projectId: "qnary-my-fb",
+  // storageBucket: "qnary-my-fb.appspot.com",
   credential: admin.credential.cert(serviceAccount)
 });
 
@@ -36,23 +36,20 @@ function isPending(approval) {
 
 const approvals = {
   approvals(_, {}, ctx) {
-    return query(_, {}, ctx, approvalsRef);
+    return query({}, ctx, approvalsRef);
   },
   approval(_, { id }, ctx) {
-    return query(_, { id }, ctx, approvalsRef);
+    return query({ id }, ctx, approvalsRef);
   },
   async usrerapprovals(_, { oid, uid, status }, ctx) {
     if (Lodash.isNil(ctx.request.user)) throw new Error(`Unauthorized request`)
-    let userApprovalsSnap 
-    if (!Lodash.isNil(status))
-      userApprovalsSnap =  await orgsuserappRef
-        .child(`${oid}/${uid}`)
-        .orderByChild("status").equalTo(status)
-        .once("value");
-    else
-      userApprovalsSnap =  await orgsuserappRef
-      .child(`${oid}/${uid}`)
-      .once("value");
+    const orgsuserappRef = admin.database().ref(`organization_user_approvals/${oid}/${uid}`);
+    console.log( ' STATUS ', Lodash.isNil(status)); 
+    let userApprovalsSnap =  !Lodash.isNil(status) ?
+    (await orgsuserappRef.orderByChild("status").equalTo(status).once("value"))
+    :
+    (await orgsuserappRef.once("value"));
+    
     async function getApproval(aid) {
       let approvalSnap = await approvalsRef.child(`${aid}`).once("value");
       return approvalSnap;
@@ -68,7 +65,9 @@ const approvals = {
     approvalsSnaps.forEach(app => {
       let id = app.key;
       let approval = app.val();
-      returnApps.push(Object.assign({ id: id }, approval));
+      // org_user_app status can differ from /approvals status ???
+      if (approval.status === status)
+        returnApps.push(Object.assign({ id: id }, approval));
     });
     return returnApps;
   }
