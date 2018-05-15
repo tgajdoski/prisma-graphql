@@ -44,19 +44,18 @@ const approvals = {
   async usrerapprovals(_, { oid, uid, status }, ctx) {
    // if (Lodash.isNil(ctx.request.user)) throw new Error(`Unauthorized request`)
     const orgsuserappRef = admin.database().ref(`organization_user_approvals/${oid}/${uid}`);
-    console.log( ' STATUS ', Lodash.isNil(status)); 
     let userApprovalsSnap =  !Lodash.isNil(status) ?
     (await orgsuserappRef.orderByChild("status").equalTo(status).once("value"))
     :
     (await orgsuserappRef.once("value"));
-    
+      
     async function getApproval(aid) {
       let approvalSnap = await approvalsRef.child(`${aid}`).once("value");
       return approvalSnap;
     }
     let approvalsPromises = [];
     userApprovalsSnap.forEach(snap => {
-      let aid = snap.key;
+        let aid = snap.key;
       let $p = getApproval(aid);
       approvalsPromises.push($p);
     });
@@ -66,8 +65,13 @@ const approvals = {
       let id = app.key;
       let approval = app.val();
       // org_user_app status can differ from /approvals status ???
-      if (approval.status === status)
+      if (Lodash.isNil(status)){
+         returnApps.push(Object.assign({ id: id }, approval));
+      }
+      else
+        if (approval.status === status)
         returnApps.push(Object.assign({ id: id }, approval));
+         
     });
     return returnApps;
   }
