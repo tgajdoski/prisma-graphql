@@ -34,7 +34,7 @@ const organizations_mutation = {
   },
   async deleteOrganization(_, { input }, { token }) {
     let uid = await admin.auth().verifyIdToken(token);
-    const orgRef = groupsRef.child(input.id);
+    const orgRef = orgsRef.child(input.id);
     return orgRef.once('value')
       .then((snapshot) => {
         const org = snapshot.val();

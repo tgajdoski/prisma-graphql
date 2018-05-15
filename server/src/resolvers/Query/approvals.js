@@ -1,6 +1,6 @@
 const { getUserId, ApprovalStatus, PublishStatu } = require("../../utils");
 const admin = require("firebase-admin");
-const { query } = require("./query");
+const { query } = require("../query");
 const functions = require("firebase-functions");
 const Lodash = require("lodash");
 var serviceAccount = require("../../qnary-dev.json");
@@ -42,7 +42,7 @@ const approvals = {
     return query({ id }, ctx, approvalsRef);
   },
   async usrerapprovals(_, { oid, uid, status }, ctx) {
-    if (Lodash.isNil(ctx.request.user)) throw new Error(`Unauthorized request`)
+   // if (Lodash.isNil(ctx.request.user)) throw new Error(`Unauthorized request`)
     const orgsuserappRef = admin.database().ref(`organization_user_approvals/${oid}/${uid}`);
     console.log( ' STATUS ', Lodash.isNil(status)); 
     let userApprovalsSnap =  !Lodash.isNil(status) ?

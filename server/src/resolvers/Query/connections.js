@@ -1,7 +1,7 @@
 const { getUserId , ApprovalStatus, PublishStatu} = require('../../utils')
 const admin = require('firebase-admin');
 const functions = require('firebase-functions');
-const  { query } = require('./query');
+const  { query } = require('../query');
 const Lodash = require('lodash');
 
 

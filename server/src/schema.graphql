@@ -14,6 +14,9 @@ type Query {
 
   organizations: [Organization]
   organization(id: String!): Organization
+
+  organization_user_approvals(oid: String! , uid: String!): [OrganizationUserApproval]
+  organization_user_approval(oid: String! , uid: String!, id: String!): OrganizationUserApproval
 }
 
 type Mutation {
@@ -36,6 +39,10 @@ type Mutation {
   createOrganization(input: OrganizationCreateInput!): Organization
   updateOrganization(input: OrganizationInput): Organization
   deleteOrganization(input: OrganizationDeleteInput): Organization
+
+  createOrganizationUserApproval(input: OrganizationUserApprovalCreateInput!): OrganizationUserApproval
+  updateOrganizationUserApproval(input: OrganizationUserApprovalInput): OrganizationUserApproval
+  deleteOrganizationUserApporval(input: OrganizationUserApprovalDeleteInput): OrganizationUserApproval
 }
 
 type Settings {
@@ -83,6 +90,42 @@ input ApprovalInput {
   updated_at: String
   updated_by: String
 }
+
+
+input OrganizationUserApprovalCreateInput {
+  uid: String!
+  oid: String!
+  created_at: String
+  created_by: String
+  source: String!
+  status: String!
+}
+
+input OrganizationUserApprovalInput {
+  id: String!
+  uid: String!
+  oid: String!
+  created_at: String
+  created_by: String
+  source: String
+  status: String
+}
+input OrganizationUserApprovalDeleteInput {
+  oid: String!
+  uid: String!
+  id: String!
+}
+
+
+type OrganizationUserApproval {
+  uid: String
+  oid: String
+  created_at: String
+  created_by: String
+  source: String
+  status: String
+}
+
 
 input ApprovalDeleteInput {
   id: String!
