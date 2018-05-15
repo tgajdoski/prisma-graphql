@@ -41,7 +41,7 @@ const approvals = {
   approval(_, { id }, ctx) {
     return query({ id }, ctx, approvalsRef);
   },
-  async usrerapprovals(_, { oid, uid, status }, ctx) {
+  async userapprovals(_, { oid, uid, status }, ctx) {
    // if (Lodash.isNil(ctx.request.user)) throw new Error(`Unauthorized request`)
     const orgsuserappRef = admin.database().ref(`organization_user_approvals/${oid}/${uid}`);
     let userApprovalsSnap =  !Lodash.isNil(status) ?
