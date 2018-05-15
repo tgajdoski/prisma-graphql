@@ -60,7 +60,7 @@ input ApprovalCreateInput {
   category: String
   connection_id: String
   content: String
-  created_at: Int
+  created_at: String
   created_by: String
   edited_by: String
   image: String
@@ -78,7 +78,7 @@ input ApprovalInput {
   category: String
   connection_id: String
   content: String
-  created_at: Int
+  created_at: String
   created_by: String
   edited_by: String
   image: String
@@ -136,7 +136,7 @@ type Approval {
   category: String
   connection_id: String
   content: String
-  created_at: Int
+  created_at: String
   created_by: String
   edited_by: String
   image: String

@@ -1,0 +1,186 @@
+{
+	approvals
+  {
+    id
+    content
+    status
+    image
+    oid
+    uid
+    publish{
+      settings{
+        opt_in
+        timezone
+      }
+      status
+      updated_at
+    }
+    publish_at
+    publish_date
+    publish_status
+  }
+}
+
+
+
+{
+	organization_user_approvals(oid: "-KjOu2EQbfZb_sxUnwJV",
+    uid:"JH6TcumpfnMDdor6c5Ksns917cq1")
+  {
+    uid
+    oid
+    status
+    source
+  }
+}
+
+
+{
+	organization_user_approval(oid: "-KjOu2EQbfZb_sxUnwJV",
+    uid:"JH6TcumpfnMDdor6c5Ksns917cq1", id:"-L096ewG1BNx3-je2w1d")
+  {
+    uid
+    oid
+    status
+    source
+  }
+}
+
+{
+  "data": {
+    "organization_user_approval": {
+      "uid": "JH6TcumpfnMDdor6c5Ksns917cq1",
+      "oid": "-KjOu2EQbfZb_sxUnwJV",
+      "status": "rejected",
+      "source": "twitter",
+      "created_at": "1513072013232",
+      "created_by": "JH6TcumpfnMDdor6c5Ksns917cq1"
+    }
+  }
+}
+
+
+
+mutation
+{
+	updateOrganizationUserApproval( input: {
+    uid:"JH6TcumpfnMDdor6c5Ksns917cq1",
+    oid: "-KjOu2EQbfZb_sxUnwJV",
+    created_at:"1513072013232"
+    created_by:"JH6TcumpfnMDdor6c5Ksns917cq1"
+  	source: "twitter"
+    id:"-L096ewG1BNx3-je2w1d",
+    status: "rejected"
+  })
+  {
+    uid
+    oid
+    status
+    source
+  }
+}
+
+
+
+mutation
+{
+	createOrganizationUserApproval( input: {
+    uid:"JH6TcumpfnMDdor6c5Ksns917cq1",
+    oid: "-KjOu2EQbfZb_sxUnwJV",
+    created_at:"1513072013232"
+    created_by:"JH6TcumpfnMDdor6c5Ksns917cq1"
+  	source: "twitterMITTER"
+    status: "rejected"
+  })
+  {
+    uid
+    oid
+    status
+    source
+  }
+}
+
+
+mutation
+{
+	deleteOrganizationUserApporval( input: {
+     uid:"JH6TcumpfnMDdor6c5Ksns917cq1",
+    oid: "-KjOu2EQbfZb_sxUnwJV",
+    id: "-LCYK2aYBxP-ISExCd9k"})
+  {
+    uid
+    oid
+    status
+    source
+  }
+}
+
+
+
+
+mutation
+{
+  createApproval(input: {
+    category: "Search"
+    connection_id: "-KlstxQBFe5vWL2lwq4m"
+    content: "Google MOOGLE"
+    created_at: "1498481915089"
+    created_by: "JH6TcumpfnMDdor6c5Ksns917cq1"
+    edited_by: "JH6TcumpfnMDdor6c5Ksns917cq1"
+    image: ""
+    oid: "-KjOu2EQbfZb_sxUnwJV"
+    original_content: "Google MOOGLE"
+    source:  "twitter"
+    status:  "rejected"
+    uid:  "JH6TcumpfnMDdor6c5Ksns917cq1"
+    updated_at:  "1499867570622"
+    updated_by: "JH6TcumpfnMDdor6c5Ksns917cq1"
+  })
+  {
+    id
+    content
+    created_at
+    image
+    status
+  }
+}
+
+mutation
+{
+	deleteApproval(input: {id: "-LCYy1hV25HLcOFFqPOb"})
+  {
+  	id
+    category
+  }
+}
+
+
+
+
+mutation
+{
+  updateApproval (input: {
+    id: "-LCYz3l7IxK4hsxVj49H"
+    category: "Search"
+    connection_id: "-KlstxQBFe5vWL2lwq4m"
+    content: "MAMAMAM"
+    created_at: "1498481915089"
+    created_by: "JH6TcumpfnMDdor6c5Ksns917cq1"
+    edited_by: "JH6TcumpfnMDdor6c5Ksns917cq1"
+    image: ""
+    oid: "-KjOu2EQbfZb_sxUnwJV"
+    original_content: "Google MOOGLE"
+    source:  "twitter"
+    status:  "draft"
+    uid:  "JH6TcumpfnMDdor6c5Ksns917cq1"
+    updated_at:  "1499867570622"
+    updated_by: "JH6TcumpfnMDdor6c5Ksns917cq1"
+  })
+  {
+    id
+    content
+    created_at
+    image
+    status
+  }
+}
