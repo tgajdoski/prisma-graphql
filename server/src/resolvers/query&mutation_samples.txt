@@ -184,3 +184,80 @@ mutation
     status
   }
 }
+
+
+
+
+mutation
+{
+	createConnection(input:{
+  auth: {
+    access_token: "AQXQ4RHDT4tQXX4AE9rFKBWlz-VYT_yDF_9mXxkCh8YwwSPK_R7x3PcVQ5Rr7AOmaHEs8lKWANJYtv5YzbrhOpxnjgphdZkNJIneJVR0lD0-g0OqhNIBTDMwPz3QYmxqdBja8699j9mXngApccHWF0_IUfh0yUmS3Za4GHJO5HjDRM01EoVy1OLCzJ3LnTHjpyd7rwj9nMEgLTgziGANRKfSJkOKt584JvXvF_iMesTeBH1XzZf_Uwr9d7-MTIh02Iclw15-Z7kgocXhXZHTEJS0qCa3bHJF7Zia9kXy7QQj5C7WIv0LY76lfU3dNuhLIt7YRaiw3f7fG0iLDagpk3pT1HcD3g",
+    created_at: "1526321398102",
+    expires: "1531505423075",
+    expires_in: "5183999",
+    firebase_id: "-LCUq2lsPHK6hiKbN78v",
+    provider: "linkedin2"
+  },
+  created_at: "1526321398102",
+  created_by: "6a30e2a4-76fe-4559-b5d9-0eaec7aa2dee",
+  ignore: false,
+  name: "YOUYOU",
+  oid: "-KjOu2EQbfZb_sxUnwJV",
+  profile: {
+    avatar: "https://media.licdn.com/dms/image/C4D03AQE0GZtPkAGpdA/profile-displayphoto-shrink_100_100/0?e=1531958400&v=beta&t=dh3sURdU6m0P48VdQ-aYzERxDSRG7_YnAgz-cndno0U",
+    bio: "Full Stack Developer",
+    email: "dreadjr+linkedin@gmail.com",
+    firstname: "Toni",
+    id: "yGJn72jYRO",
+    lastname: "Read Jr",
+    name: "Douglas Read Jr",
+    raw: {
+      emailAddress: "dreadjr+linkedin@gmail.com",
+      firstName: "Douglas",
+      headline: "Full Stack Developer",
+      id: "yGJn72jYRO",
+      lastName: "Read Jr",
+      pictureUrl: "https://media.licdn.com/dms/image/C4D03AQE0GZtPkAGpdA/profile-displayphoto-shrink_100_100/0?e=1531958400&v=beta&t=dh3sURdU6m0P48VdQ-aYzERxDSRG7_YnAgz-cndno0U",
+      publicProfileUrl: "https://www.linkedin.com/in/dreadjr"
+    },
+    url: "https://www.linkedin.com/in/dreadjr"
+  },
+  source: "linkedin",
+  source_type: "linkedin_profile",
+  status: "1",
+  type: "profile",
+  uid: "6a30e2a4-76fe-4559-b5d9-0eaec7aa2dee",
+  version: "1"
+})
+{
+ id
+  name
+  status
+  oid
+  profile
+  {
+    name
+    bio
+  }
+}
+}
+
+
+
+
+mutation
+{
+	deleteConnection(input: {
+    id: "-LCbyb4IRiNJCf1Im4Ja"
+  })
+  {
+    id
+    status
+  }
+}
+
+
+
+
+

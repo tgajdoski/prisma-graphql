@@ -46,6 +46,8 @@ const query = async ({ id }, ctx, ref) => {
 
     const delete_mutation = async ({ input }, ctx, ref) => {
         //  if (Lodash.isNil(ctx.request.user)) throw new Error(`Unauthorized request`) 
+        console.log('input' , input);
+        console.log('ctx' , ctx);
          const refPath = ref.child(input.id);
          return refPath.once('value')
            .then((snapshot) => {

@@ -2,48 +2,20 @@ const { getUserId , ApprovalStatus, PublishStatu} = require('../../utils')
 const admin = require('firebase-admin');
 const functions = require('firebase-functions');
 const Lodash = require('lodash');
-
+const { create_mutation, update_mutation, delete_mutation } = require("../query");
 
 const connectionsRef = admin.database().ref('connections');
 
 const connections_mutation = {
-  async createConnection(_, { input }, { token }) {
-    let uid = await admin.auth().verifyIdToken(token);
-    return (
-      new Promise((resolve) => {
-        const connection = connectionsRef.push(input, () => {
-          resolve(Object.assign({ id: connection.key }, input)
-          );
-        });
-      })
-    );
+  createConnection(_, { input }, ctx) {
+    return create_mutation({input}, ctx, connectionsRef);
   },
-  async updateConnection(_, { input }, { token }) {
-    let uid = await admin.auth().verifyIdToken(token);
-    const connRef = connectionsRef.child(input.id);
-    return connRef.once('value')
-      .then(snapshot => {
-        const conn = snapshot.val();
-        if (conn === null) throw new Error('404');
-        return conn;
-      })
-      .then((conn) => {
-        const update = Object.assign(conn, input);
-        delete update.id;
-        return connRef.set(update).then(() => (Object.assign({ id: input.id }, update)));
-      });
+  updateConnection(_, { input }, ctx) {
+    return update_mutation({input}, ctx, connectionsRef);
   },
-  async deleteConnection(_, { input }, { token }) {
-    let uid = await admin.auth().verifyIdToken(token);
-    const connRef = connectionsRef.child(input.id);
-    return connRef.once('value')
-      .then((snapshot) => {
-        const conn = snapshot.val();
-        if (conn === null) throw new Error('404');
-        return Object.assign({ id: input.id }, conn);
-      })
-      .then(conn => connRef.remove().then(() => (conn)));
-  },
+  deleteConnection(_, { input }, ctx) {
+    return delete_mutation({input}, ctx, connectionsRef);
+   },
   }
   
   module.exports = { connections_mutation }

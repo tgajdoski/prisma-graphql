@@ -1,5 +1,5 @@
 type Query {
-  approvals: [Approval]
+    approvals: [Approval]
   userapprovals(oid: String!, uid: String!, status: String): [Approval]
   approval(id: String!): Approval
 
@@ -58,7 +58,7 @@ type Publish {
 
 input ApprovalCreateInput {
   category: String
-  connection_id: String
+  connection_id: String 
   content: String
   created_at: String
   created_by: String
@@ -157,6 +157,10 @@ type Approval {
 type auth {
   firebase_id : String
   provider : String
+  access_token: String
+  created_at:  String
+  expires: String
+  expires_in: String
 }
 
 type ProfileRaw {
@@ -323,6 +327,10 @@ type Organization {
 input auth_input {
   firebase_id: String
   provider: String
+  access_token: String
+  created_at:  String
+  expires: String
+  expires_in: String
 }
 
 input ProfileRawInput {
