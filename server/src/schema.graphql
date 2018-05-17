@@ -1,5 +1,5 @@
 type Query {
-    approvals: [Approval]
+  approvals: [Approval]
   userapprovals(oid: String!, uid: String!, status: String): [Approval]
   approval(id: String!): Approval
 
@@ -17,6 +17,9 @@ type Query {
 
   organization_user_approvals(oid: String! , uid: String!): [OrganizationUserApproval]
   organization_user_approval(oid: String! , uid: String!, id: String!): OrganizationUserApproval
+
+  notifications(platform: String!): [Notification]
+  notification(platform: String! , id: String!): Notification
 }
 
 type Mutation {
@@ -43,6 +46,11 @@ type Mutation {
   createOrganizationUserApproval(input: OrganizationUserApprovalCreateInput!): OrganizationUserApproval
   updateOrganizationUserApproval(input: OrganizationUserApprovalInput): OrganizationUserApproval
   deleteOrganizationUserApporval(input: OrganizationUserApprovalDeleteInput): OrganizationUserApproval
+
+  createNotification(input: NotificationInput!): Notification
+  updateNotification(input: NotificationInput): Notification
+  deleteNotification(input: NotificationDeleteInput): Notification
+
 }
 
 type Settings {
@@ -415,5 +423,74 @@ input ConnectionInput {
 }
 
 input ConnectionDeleteInput {
+  id: String!
+}
+
+
+type DeviceNotif {
+  available : Boolean
+  cordova : String
+  isVirtual : Boolean
+  manufacturer : String
+  model :String
+  platform :String
+  serial : String
+  uuid : String
+  version : String
+}
+
+input DeviceNotifInput {
+  id: String
+  available : Boolean
+  cordova : String
+  isVirtual : Boolean
+  manufacturer : String
+  model :String
+  platform :String
+  serial : String
+  uuid : String
+  version : String
+}
+
+type Sms {
+  countrycode : String
+  intlprefix : String
+  phonenumber :String
+}
+
+input SmsInput {
+  countrycode : String
+  intlprefix : String
+  phonenumber :String
+}
+
+
+type Notification {
+  id: String
+  app : String
+  created_at : String
+  sms: Sms
+  device: DeviceNotif
+  platform :String
+  status : Int
+  token : String
+  uid : String
+}
+
+
+input NotificationInput {
+  app : String
+  created_at : String
+  sms: SmsInput
+  device: DeviceNotifInput
+  platform :String
+  status : Int
+  token : String
+  uid : String
+}
+
+
+input NotificationDeleteInput {
+  platform: String!
   id: String!
 }

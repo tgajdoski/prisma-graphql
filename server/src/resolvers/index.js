@@ -5,7 +5,7 @@ const { organizations } = require('./Query/organizations')
 const { devices } = require('./Query/devices')
 const { connections } = require('./Query/connections')
 const { organization_user_approvals } = require('./Query/organization_user_approval')
-
+const { notifications } = require('./Query/notifications')
 
 const { approvals_mutation } = require('./Mutation/approvals')
 const { organization_User_approval_mutation } = require('./Mutation/organization_user_approval')
@@ -14,6 +14,7 @@ const { organizations_mutation } = require('./Mutation/organizations')
 const { devices_mutation } = require('./Mutation/devices')
 const { connections_mutation } = require('./Mutation/connections')
 const { organization_user_approvals_mutation } = require('./Mutation/organization_user_approval')
+const { notifications_mutation } = require('./Mutation/notifications')
 // const { Subscription } = require('./Subscription')
 // const { AuthPayload } = require('./AuthPayload')
 
@@ -25,6 +26,7 @@ module.exports = {
     ...groups,
     ...devices,
     ...connections,
+    ...notifications,
   },
   Mutation: {
     ...approvals_mutation,
@@ -33,6 +35,7 @@ module.exports = {
     ...groups_mutation,
     ...devices_mutation,
     ...connections_mutation,
+    ...notifications_mutation,
   }
   // Subscription,
   // AuthPayload,

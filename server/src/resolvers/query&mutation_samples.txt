@@ -261,3 +261,92 @@ mutation
 
 
 
+
+
+
+
+{
+  
+notifications (platform: "ios")
+  {
+    id
+   app
+    device{
+    available
+      cordova 
+      isVirtual
+       manufacturer
+      model
+      platform
+      serial
+      uuid
+      version
+    }
+    sms{
+      countrycode
+      intlprefix
+    }
+    status
+    token
+    uid
+  }
+}
+
+
+
+
+
+mutation
+
+{
+updateNotification(input: 
+  {
+  app : "qnary",
+  created_at : "MMMMMMMMMM",
+  device : {
+    id: "55555555555",
+    available : true,
+    cordova : "4.5.4",
+    isVirtual : false,
+    manufacturer : "APPPLE",
+    model : "iPhone8,1",
+    platform : "iOS",
+    serial : "unknown",
+    uuid : "167ED895-3D6D-4D6E-9A95-AB46DDF3D6ED",
+    version : "11.3.1"
+  },
+  platform : "ios",
+  sms : {
+    countrycode : "us",
+    intlprefix : "1",
+    phonenumber : "(603) 219-9191"
+  },
+  status : 1,
+  token : "6032199191",
+  uid : "6a30e2a4-76fe-4559-b5d9-0eaec7aa2dee"
+})
+  {
+    id
+   app
+    device{
+    available
+      cordova 
+      isVirtual
+       manufacturer
+      model
+      platform
+      serial
+      uuid
+      version
+    }
+    sms{
+      countrycode
+      intlprefix
+    }
+    status
+    token
+    uid
+  }
+}
+
+
